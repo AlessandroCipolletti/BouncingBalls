@@ -1,0 +1,122 @@
+<html><head><meta name="viewport" content="width=device-width, user-scalable=no, height=device-height"/><meta name="apple-mobile-web-app-capable" content="yes" />
+<style>body{background-image:url('images/bg.png');margin:0px;overflow:hidden}a{font-family:verdana}.titolo{font-size:50px;font-weight:900}.puls{float:left;width:50%;height:40px;font-size:25px;font-weight:900}.title{font-size:30px; margin:10px}.text-title{font-size:22px}.text{font-size:16px}table{width:99%;margin-top:10px}td{width:33%}#tabcolor td,#tababl td{text-align:center;width:20%}#tabcolor td div{margin:auto}#tababl{margin-top:10px}#load{-khtml-border-radius:50px;height:160px;position:fixed;opacity:0.8;display:none;z-index:10000}.ui-slider,#slide{margin:auto}#slide,#slide2,#slide3{width:80%}#sfondi img{border:solid 5px white;width:65px;height:85px;margin:0px;}#sfondi div{float:left;width:109px;text-align:center; height:100px;padding:0px;}</style>
+<link href="css/jquery.ibutton.css" rel="stylesheet"/><link href="css/colorpicker.css" rel="stylesheet"/><script type="text/javascript" src="js/jquery.js"></script><script type="text/javascript" src="js/colorpicker.js"></script><script type="text/javascript" src="js/jquery.ibutton.js"></script><script type="text/javascript" src="js/jquery.easing.1.3.js"></script><script type="text/javascript" src="js/jquery.metadata.js"></script><script type="text/javascript" src="js/jquery-ui-1.7.1.custom.min.js"></script><script type="text/javascript" src="js/select.js"></script><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"/><link rel="Stylesheet" href="css/select.css" type="text/css" />
+<script type="text/javascript">
+console.log("INIZIO");
+var Enable=[],dat=window.sessionStorage,Q=window.DeviceMotionEvent!=undefined?true:false;
+$(document).ready(function(){
+	$("input").iButton({init:function(){debug("init",arguments);},change:function(){debug("change",arguments)},click:function(){debug("click",arguments)}});
+	$('#colore1').ColorPicker({color: 'ffffff',onShow:function(colpkr){$(colpkr).fadeIn(500);return false;},onHide:function(colpkr){$(colpkr).fadeOut(500);return false;},onChange:function(hsb,hex,rgb){$('#colore1 div').css('backgroundColor','#'+hex);$('#col1').val(hex)}});
+	$('#colore1 div').css('backgroundColor','#ffffff');
+	$('#colore2').ColorPicker({color: 'ffffff',onShow:function(colpkr){$(colpkr).fadeIn(500);return false;},onHide:function(colpkr){$(colpkr).fadeOut(500);return false;},onChange:function(hsb,hex,rgb){$('#colore2 div').css('backgroundColor','#'+hex);$('#col2').val(hex)}});
+	$('#colore2 div').css('backgroundColor','#ffffff');
+	$('#colore3').ColorPicker({color: 'ffffff',onShow:function(colpkr){$(colpkr).fadeIn(500);return false;},onHide:function(colpkr){$(colpkr).fadeOut(500);return false;},onChange:function(hsb,hex,rgb){$('#colore3 div').css('backgroundColor','#'+hex);$('#col3').val(hex)}});
+	$('#colore3 div').css('backgroundColor','#ffffff');
+	$('#colore4').ColorPicker({color: 'ffffff',onShow:function(colpkr){$(colpkr).fadeIn(500);return false;},onHide:function(colpkr){$(colpkr).fadeOut(500);return false;},onChange:function(hsb,hex,rgb){$('#colore4 div').css('backgroundColor','#'+hex);$('#col4').val(hex)}});
+	$('#colore4 div').css('backgroundColor','#ffffff');
+	$('#colore5').ColorPicker({color: 'ffffff',onShow:function(colpkr){$(colpkr).fadeIn(500);return false;},onHide:function(colpkr){$(colpkr).fadeOut(500);return false;},onChange:function(hsb,hex,rgb){$('#colore5 div').css('backgroundColor','#'+hex);$('#col5').val(hex)}});
+	$('#colore5 div').css('backgroundColor','#ffffff');
+	if(ok(dat.colorE)){$('#col5').val(dat.colorE);$("#colore5").ColorPickerSetColor(dat.colorE,'cp_5');$('#colore5 div').css('backgroundColor','#'+dat.colorE);Enable[5]=true}else{$('#colore5').css('opacity','0.5');}
+	if(ok(dat.colorD)){$('#col4').val(dat.colorD);$("#colore4").ColorPickerSetColor(dat.colorD,'cp_4');$('#colore4 div').css('backgroundColor','#'+dat.colorD);Enable[4]=true}else{$('#colore4').css('opacity','0.5');}
+	if(ok(dat.colorC)){$('#col3').val(dat.colorC);$("#colore3").ColorPickerSetColor(dat.colorC,'cp_3');$('#colore3 div').css('backgroundColor','#'+dat.colorC);Enable[3]=true}else{$('#colore3').css('opacity','0.5');}
+	if(ok(dat.colorB)){$('#col2').val(dat.colorB);$("#colore2").ColorPickerSetColor(dat.colorB,'cp_2');$('#colore2 div').css('backgroundColor','#'+dat.colorB);Enable[2]=true}else{$('#colore2').css('opacity','0.5');}
+	if(ok(dat.colorA)){$('#col1').val(dat.colorA);$("#colore1").ColorPickerSetColor(dat.colorA,'cp_1');$('#colore1 div').css('backgroundColor','#'+dat.colorA);Enable[1]=true}else{$('#colore1').css('opacity','0.5');}
+	$('#spd').selectToUISlider().next();
+	$('#ing').selectToUISlider().next();
+	$('#rimb').selectToUISlider().next();
+});
+function debug(){if(window.console&&window.console.log )console.log(arguments)}
+function SF(el){el.style.border="solid 5px black";document.getElementById(document.getElementById("sfondo").value).style.border = "solid 5px white";document.getElementById("sfondo").value = el.id;}
+Touch=function(e){e.preventDefault()}
+function carica(){document.getElementById('load').style.display='inline';document.addEventListener("touchstart",Touch);document.addEventListener("touchmove",Touch)}
+function ok(str){if(str!=null && str!='')return true;else return false}
+function ck(id){if(document.getElementById(id).checked)return true}
+function touchHandler(event){event.preventDefault();var first=event.changedTouches[0],type="";switch(event.type){case "touchmove":type="mousemove";break;case "touchend":type="mouseup";break;case "touchstart":type="mousedown";break}var simulatedEvent = document.createEvent("MouseEvent");simulatedEvent.initMouseEvent(type,true,true,window,1,first.screenX,first.screenY,first.clientX,first.clientY,false,false,false,false,0,null);first.target.dispatchEvent(simulatedEvent)}
+function salva(dat){console.log("CIAO"); carica();dat.imm=$('#sfondo').val();dat.ing=$('#ing').val();dat.rimb=$('#rimb').val();dat.spd=$('#spd').val();dat.colorA=$('#col1').val();dat.colorB=$('#col2').val();dat.colorC=$('#col3').val();dat.colorD=$('#col4').val();dat.colorE=$('#col5').val();if(document.getElementById('Parola').value=='')dat.par='H';else dat.par=$('#Parola').val();dat.vert=(ck('Vert')?'si':'no');dat.oriz=(ck('Oriz')?'si':'no');dat.forma=(ck('Class')?'circle':'porcod');dat.big=(ck('Big')?'si':'no');dat.orien=(ck('sx')?'sx':(ck('dx')?'dx':(ck('ve')?'ve':'or')));dat.ordine=(ck('Order')?'si':'no');dat.mod=(ck('Mod')?'si':'no');dat.acc=(ck('Acc')?'si':'no');document.location.href='ipad.html';}
+function swich(n,t){if(!t){$('#col'+n).val('');$('#colore'+n).ColorPickerSetColor('ffffff','cp_'+n);$('#colore'+n+' div').css('backgroundColor','#ffffff');$('#colore'+n).css('opacity','0.5');Enable[n]=false}else {$('#col'+n).val('ffffff');$('#colore'+n).css('opacity','1.0');Enable[n]=true}}
+</script></head><body><center><img src="images/loading.gif" id="load">
+<a class="titolo" style="color:red">B</a><a class="titolo" style="color:green">o</a><a class="titolo" style="color:yellow">u</a><a class="titolo" style="color:blue">n</a><a class="titolo" style="color:brown">c</a><a class="titolo" style="color:grey">i</a><a class="titolo" style="color:red">n</a><a class="titolo" style="color:rgb(69,167,206)">g&nbsp; &nbsp;</a><a class="titolo" style="color:rgb(172,211,115)">B</a><a class="titolo" style="color:rgb(254,245,104)">a</a><a class="titolo" style="color:rgb(199,178,153)">l</a><a class="titolo" style="color:rgb(54,54,54)">l</a><a class="titolo" style="color:rgb(0,74,128)">s</a><br><br>
+<a class="title">Text</a><br><br><input maxLength="8" size="11" type="text" id="Parola" style="height:40px;font-size:30px;" value=""><br><br>
+<a class="title">Options</a><br><br>
+<a class="text-title">Movements:</a><br>
+<table><tr><td><center><a class="text">Vertical</a></center></td><td><center><input type="checkbox" id="Vert" class="{labelOn:'yes',labelOff:'no'}"/></center></td></tr><tr><td><center><a class="text">Horizontal</a></center></td><td><center><input type="checkbox" id="Oriz" class="{labelOn: 'yes', labelOff: 'no'}"/></center></td></tr></table><br>
+<a class="text-title">Particle Shape:</a><br><br><input type="checkbox" id="Class" class="{labelOn:'Balls',labelOff:'Squares'}"/><br>
+<a class="text-title">Enlargements:</a><br><br><input type="checkbox" id="Big" class="{labelOn:'Enlarge',labelOff:'Not Enlarge'}"/><br><br><br>
+<div id="slide2"><select id="ing" style="display:none;"><option value="0.5">Smaller</option><option value="0.6"></option><option value="0.7"></option><option value="0.8"></option><option value="0.9"></option><option value="1.0"></option><option value="1.1"></option><option value="1.2"></option><option value="1.3"></option><option value="1.4"></option><option value="1.5">Bigger</option></select></div><br>
+<a class="text-title">Rebound Dimension:</a><br><br><br><br>
+<div id="slide3"><select id="rimb" style="display:none;"><option value="0.5">Slower</option><option value="1"></option><option value="2"></option><option value="3"></option><option value="1.1"></option><option value="4"></option><option value="5"></option><option value="6"></option><option value="7"></option><option value="8"></option><option value="9"></option><option value="10">Faster</option></select></div><br>
+<a class="text-title">Position:</a><table>
+<tr><td><center><a class="text">Left</a></center></td><td><center><input type="radio" name="Orien" id="sx" class="{labelOn:'yes',labelOff:'no'}"/></center></td></tr>
+</tr><tr><td><center><a class="text">Right</a></center></td><td><center><input type="radio" name="Orien" id="dx" class="{labelOn: 'yes', labelOff:'no'}"/></center></td></tr>
+<tr><td><center><a class="text">Horizontal</a></center></td><td><center><input type="radio" name="Orien" id="or" class="{labelOn:'yes',labelOff:'no'}"/></center></td></tr>
+<tr><td><center><a class="text">Vertical</a></center></td><td><center><input type="radio" name="Orien" id="ve" class="{labelOn:'yes',labelOff:'no'}"/></center></td>
+</table><br>
+<a class="title">Colors</a><br><br>
+<a class="text-title">Shades:</a><br><br><input type="checkbox" id="Mod" class="{labelOn:'with Shades',labelOff:'Uniform'}"/><br>
+<a class="text-title">Order:</a><br><br><input type="checkbox" id="Order" class="{labelOn:'Selected',labelOff:'Random'}"/><br>
+<table id="tabcolor"><tr><td><a class="text">1°</a><br><br><div class="col" id="colore1"><div id="divcol1"></div></div><input type="hidden" id="col1" value=""><td><a class="text">2°</a><br><br><div class="col" id="colore2"><div id="divcol2"></div></div><input type="hidden" id="col2" value=""><td><a class="text">3°</a><br><br><div class="col" id="colore3"><div id="divcol3"></div></div><input type="hidden" id="col3" value=""><td><a class="text">4°</a><br><br><div class="col" id="colore4"><div id="divcol4"></div></div><input type="hidden" id="col4" value=""><td><a class="text">5°</a><br><br><div class="col" id="colore5"><div id="divcol5"></div></div><input type="hidden" id="col5" value=""></table>
+<table id="tababl"><tr><td><center><input type="checkbox" id="abl1" class="{labelOn:'|',labelOff:'O'}" onChange="swich(1,this.checked)"></center><td><center><input type="checkbox" id="abl2" class="{labelOn:'|',labelOff:'O'}" onChange="swich(2,this.checked)"></center><td><center><input type="checkbox" id="abl3" class="{labelOn:'|',labelOff:'O'}" onChange="swich(3,this.checked)"></center><td><center><input type="checkbox" id="abl4" class="{labelOn:'|',labelOff:'O'}" onChange="swich(4,this.checked)"></center><td><center><input type="checkbox" id="abl5" class="{labelOn:'|',labelOff:'O'}" onChange="swich(5,this.checked)"></center></table><br>
+<br><a class="title">Background</a><br><br>
+<div style="width:100%; margin-bottom:10px" id="sfondi">
+	<div><img src="S1/0.jpg" id="no" onTouchStart="SF(this)"></div>
+    <div><img src="S1/1.jpg" id="1" onTouchStart="SF(this)"></div>
+    <div><img src="S1/2.jpg" id="2" onTouchStart="SF(this)"></div>
+    <div><img src="S1/3.jpg" id="3" onTouchStart="SF(this)"></div>
+    <div><img src="S1/4.jpg" id="4" onTouchStart="SF(this)"></div>
+    <div><img src="S1/5.jpg" id="5" onTouchStart="SF(this)"></div>
+    <div><img src="S1/6.jpg" id="6" onTouchStart="SF(this)"></div><br>
+    <div><img src="S1/7.jpg" id="7" onTouchStart="SF(this)"></div>
+    <div><img src="S1/8.jpg" id="8" onTouchStart="SF(this)"></div>
+    <div><img src="S1/9.jpg" id="9" onTouchStart="SF(this)"></div>
+    <div><img src="S1/10.jpg" id="10" onTouchStart="SF(this)"></div>
+    <div><img src="S1/11.jpg" id="11" onTouchStart="SF(this)"></div>
+    <div><img src="S1/12.jpg" id="12" onTouchStart="SF(this)"></div>
+    <div><img src="S1/13.jpg" id="13" onTouchStart="SF(this)"></div><br>
+    <div><img src="S1/14.jpg" id="14" onTouchStart="SF(this)"></div>
+    <div><img src="S1/15.jpg" id="15" onTouchStart="SF(this)"></div>
+    <div><img src="S1/16.jpg" id="16" onTouchStart="SF(this)"></div>
+    <div><img src="S1/17.jpg" id="17" onTouchStart="SF(this)"></div>
+    <div><img src="S1/18.jpg" id="18" onTouchStart="SF(this)"></div>
+    <div><img src="S1/19.jpg" id="19" onTouchStart="SF(this)"></div>
+    <div><img src="S1/20.jpg" id="20" onTouchStart="SF(this)"></div>
+</div><br><input type="text" id="sfondo" style="visibility:hidden;">
+<br><a class="title">Advanced</a><br><br>
+<a class="text-title">Particle Velocity:</a><br><br><a class="text">Milliseconds between refresh</a><br><br>
+<div id="slide"><select id="spd" style="display:none;"><option value="120">Slower</option><option value="115"></option><option value="110"></option><option value="105"></option><option value="100"></option><option value="95"></option><option value="90"></option><option value="85"></option><option value="80"></option><option value="75"></option><option value="70"></option><option value="65"></option><option value="60"></option><option value="55"></option><option value="50"></option><option value="45"></option><option value="40"></option><option value="35"></option><option value="30"></option><option value="25"></option><option value="20"></option><option value="15"></option><option value="10">Faster</option></select></div>
+<br><a class="text">This can test the device's javascript performance </a><br><br><br>
+<a class="text-title">Moving Text<br>With Accelerometer:</a><br><br>
+<input type="checkbox" id="Acc" class="{labelOn:'yes',labelOff:'no'}"/><br><br>
+<input class="puls" type="button" onTouchStart="carica();window.location.href='ipad.html'" value="Cancel"><input class="puls" type="button" id="ok" value="OK" onTouchStart="salva(dat)"><br>
+<iframe src="http://www.20segmenti.it/sponsor/sponsor.php" style="width:768px;height:60px;margin:0 0 0 -8px;border:0px"></iframe>
+</center><script>
+	document.getElementById('slide').addEventListener("touchstart",touchHandler);document.getElementById('slide').addEventListener("touchend",touchHandler);document.getElementById('slide').addEventListener("touchmove",touchHandler);
+	document.getElementById('slide2').addEventListener("touchstart",touchHandler);document.getElementById('slide2').addEventListener("touchend",touchHandler);document.getElementById('slide2').addEventListener("touchmove",touchHandler);
+	document.getElementById('slide3').addEventListener("touchstart",touchHandler);document.getElementById('slide3').addEventListener("touchend",touchHandler);document.getElementById('slide3').addEventListener("touchmove",touchHandler);
+	document.getElementById("load").style.top=document.body.offsetHeight-window.innerHeight/2;document.getElementById("load").style.left=window.innerWidth/2-80;
+	if(!ok(dat.colorA)&&!ok(dat.colorB)&&!ok(dat.colorC)&&!ok(dat.colorD)&&!ok(dat.colorE)){dat.colorA='afafaf';dat.colorB='00FF00';dat.colorC='0000FF';dat.colorD='';dat.colorE=''}
+	if(ok(dat.colorE))$('#abl5').attr('checked',true);if(ok(dat.colorD))$('#abl4').attr('checked',true);if(ok(dat.colorC))$('#abl3').attr('checked',true);if(ok(dat.colorB))$('#abl2').attr('checked',true);if(ok(dat.colorA))$('#abl1').attr('checked',true);
+	if(!ok(dat.par))$('#Parola').val('Apple');else $('#Parola').val(dat.par);
+	if(!ok(dat.spd))dat.spd='45';$('#spd').val(dat.spd);
+	if(!ok(dat.ing))dat.ing='1.0';$('#ing').val(dat.ing);
+	if(!ok(dat.rimb))dat.rimb='1';$('#rimb').val(dat.rimb);
+	if(!ok(dat.vert))dat.vert='si';
+	if(!ok(dat.oriz))dat.oriz='si';
+	if(!ok(dat.forma))dat.forma='circle';
+	if(!ok(dat.big))dat.big='si';
+	if(!ok(dat.orien)||(dat.orien!='or'&&dat.orien!='sx'&&dat.orien!='dx'&&dat.orien!='ve'))dat.orien='or';
+	if(!ok(dat.ordine))dat.ordine='si';
+	if(!ok(dat.mod))dat.mod='si';
+	if(!ok(dat.acc)||!Q)dat.acc='no';
+	if(!ok(dat.imm))dat.imm="no";
+	if(!Q)$("#Acc").attr("disabled",true);
+	if(dat.vert=='si')$('#Vert').attr('checked',true);else $('#Vert').attr('checked',false);
+	if(dat.oriz=='si')$('#Oriz').attr('checked',true);else $('#Oriz').attr('checked',false);
+	if(dat.forma=='circle')$('#Class').attr('checked',true);else $('#Class').attr('checked',false);
+	if(dat.big=='si')$('#Big').attr('checked',true);else $('#Big').attr('checked',false);
+	if(dat.orien=='sx')$('#sx').attr('checked',true);else if(dat.orien=='dx')$('#dx').attr('checked',true);else if(dat.orien=='or')$('#or').attr('checked',true);else $('#ve').attr('checked',true);
+	if(dat.ordine=='si')$('#Order').attr('checked',true);else $('#Order').attr('checked',false);
+	if(dat.mod=='si')$("#Mod").attr('checked',true);else $('#Mod').attr('checked',false);
+	if(dat.acc=='si')$("#Acc").attr('checked',true);else $('#Acc').attr('checked',false);
+	$("#"+ dat.imm).css("border","solid 5px black");
+	$("#sfondo").val(dat.imm);
+</script></body></html>
