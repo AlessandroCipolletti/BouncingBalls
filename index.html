@@ -84,8 +84,19 @@
 			window.location.href='options.html'};
 		re=function(){
 			document.getElementById("load").style.display='inline';
-			window.location.href='ipad.html'}
-		B=function(e){f=e.changedTouches[0];a=120;g=f.clientX-t.offsetLeft;j=f.clientY-t.offsetTop;e.preventDefault()}
+			window.location.href=window.location.href}
+		B=function(e){
+			if (e.type === "mousemove") {
+				g = e.clientX - t.offsetLeft;
+				j = e.clientY - t.offsetTop; 	
+			} else {
+				f = e.changedTouches[0];
+				g = f.clientX - t.offsetLeft;
+				j = f.clientY - t.offsetTop; 
+			}
+			a = 120;
+			e.preventDefault();
+		}
 		C=function(){return[window.screenX,window.screenY,document.body.clientWidth]}
 		E=function(){var b=C(),c=b[0],d=b[1];b=b[2];n=c-k;o=d-l;p=b-m;k=c;l=d;m=b;a=Math.max(0,a-2);for(d=0;b=s[d++];){b.update();if(c)c=b.i}if(Q){vy=vy-ay;vx=vx+ax;yy=parseInt(yy+vy/25);xx=parseInt(xx+vx/25);if(xx<0+LL){xx=0+LL;vx=-vx*0.9}if(yy<0+TT){yy=0+TT;vy=-vy*0.9}if(xx>WW-RR){xx=WW-RR;vx=-vx*0.8}if(yy>HH-BB){yy=HH-BB;vy=-vy*0.8}t.style.top=yy+"px";t.style.left=xx+"px"}}
 		F=function(b,c,d,h){
@@ -160,8 +171,11 @@
 				ay=e.accelerationIncludingGravity.y}}
 		document.addEventListener("touchmove",B);
 		document.addEventListener("touchstart",B);
+		document.addEventListener("mousemove",B);
 		document.getElementById("opt").addEventListener("touchstart",op);
+		document.getElementById("opt").addEventListener("mousedown",op);
 		document.getElementById("rel").addEventListener("touchstart",re);
+		document.getElementById("rel").addEventListener("mousedown",re);
 	</SCRIPT>
 </BODY>
 </HTML>
