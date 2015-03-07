@@ -1,21 +1,43 @@
 <html>
 	<head>
-	<meta name="viewport"content="initial-scale=1,width=device-width,user-scalable=no"/>
-	<meta name="apple-mobile-web-app-capable"content="yes">
+	<meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	<STYLE>
-		body{overflow:hidden}
-		#cont{position:absolute;width:0}
-		.circle{-khtml-border-radius:160px}
-		.puls{position:absolute;bottom:66px;width:50px;-webkit-border-radius:20px; opacity: 0.8; border: solid 4px white;}
+		body {
+			overflow: hidden;
+		}
+		#cont {
+			position: absolute;
+			width: 0;
+		}
+		.circle {
+			border-radius: 50%;
+		}
+		.puls {
+			position: absolute;
+			bottom: 66px;
+			width: 50px;
+			border-radius: 20px;
+			opacity: 0.8;
+			border: solid 4px white;
+		}
+		#load {
+			border-radius: 50px;
+			width: 160px;
+			top: 432px;
+			left: 304px;
+			position: absolute;
+			opacity: 0.8;
+			display: none;
+		}
 	</STYLE>
 </HEAD>
 <BODY>
 	<DIV id="cont"></DIV>
 	<img src="images/options.png" id="opt" class="puls" style="left:0px">
 	<img src="images/reload.png" id="rel" class="puls" style="right:0px">
-	<img src="images/loading.gif" style="-khtml-border-radius:50px;width:160px;top:432px;left:304px;position:absolute;opacity:0.8;display:none" id="load">
-	<iframe src="http://www.20segmenti.it/sponsor/sponsor.php" style="position:absolute;bottom:0px;width:768px;height:66px;margin:0 0 0 -8px;border:0px"></iframe>
-	<script type="text/javascript" src="js/alfabeto.js"></script>
+	<img src="images/loading.gif" id="load">
+	<script type="text/javascript" src="js/letters.js"></script>
 	<SCRIPT>
 		var WW=window.innerWidth,HH=window.innerHeight,a=120,g=-200,j=-200,k,l,m,n=0,o=0,p=0,r,s=[],t=document.getElementById('cont'),offset=0,Cont=col=-1,ParolaHex="",dat=window.sessionStorage,COL=[],xx=yy=vx=vy=ax=ay=BB=LL=RR=TT=0;
 		//inizializzazioni variabili da sessione
@@ -59,7 +81,7 @@
 				return r+g+b}}
 		op=function(){
 			document.getElementById("load").style.display='inline';
-			window.location.href='opt_ipad.html'};
+			window.location.href='options.html'};
 		re=function(){
 			document.getElementById("load").style.display='inline';
 			window.location.href='ipad.html'}
